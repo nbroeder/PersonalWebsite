@@ -1,13 +1,17 @@
+import { SideBarItem } from "./SideBarItem"
+import profile from './profilePicture.jpg'
 
 
 export const SideBar = () => {
     return (
         <div className='sideBar'>
-            <h2>about</h2>
-            <h2>projects</h2>
-            <h2>resume</h2>
-            <h2>skills</h2>
-            <h2>contact me</h2>
+            <text className='side-bar-header'>Nicholas Broeders</text>
+            <img className='side-bar-image' src={profile} alt='' />
+            <SideBarItem text={"about"}></SideBarItem>
+            <SideBarItem text={"projects"}></SideBarItem>
+            <SideBarItem text={"resume"}></SideBarItem>
+            <SideBarItem text={"skills"}></SideBarItem>
+            <SideBarItem text={"contact me"}></SideBarItem>
         </div>
     )
 }

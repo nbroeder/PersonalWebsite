@@ -1,10 +1,17 @@
 import React from 'react'
 
 
-export const SideBarItem = (text) => {
+
+
+
+
+
+export const SideBarItem = ({text}) => {
+    
+
     return (
-        <div className ='side-bar-items'>
-            <button>{text}</button>
+        <div className ="side-bar-item"  >
+            <text>{text}</text>
         </div>
     )
 }

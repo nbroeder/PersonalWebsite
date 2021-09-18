@@ -1,4 +1,5 @@
 import './App.css';
+import { MainSection } from './components/MainSection';
 import { SideBar } from './components/SideBar';
 import { WebsiteHeader } from './components/WebsiteHeader';
 
@@ -8,8 +9,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         
-       <WebsiteHeader></WebsiteHeader>
+       {/*<WebsiteHeader></WebsiteHeader>*/}
        <SideBar></SideBar>
+       <MainSection></MainSection>
       </header>
     </div>
   );
