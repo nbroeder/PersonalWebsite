@@ -85,6 +85,7 @@
   align-self: center;
   flex-direction: column;
   width: 80%;
+  gap:10px;
   
 }
 
@@ -93,4 +94,22 @@
   font-size: 35px;
   font-weight: bolder;
  align-self: center;
+}
+.projects-body{
+  display: flex;
+  flex-direction: row;
+  text-decoration: none;
+  color:black;
+}
+.projects-image{
+  width: 100px;
+  height: 100px;
+}
+.projects-side{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start ;
+  align-content: center;
+  
 }
