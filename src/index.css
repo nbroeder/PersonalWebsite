@@ -101,7 +101,7 @@
   text-decoration: none;
   color:black;
 }
-.projects-image{
+.body-image{
   width: 100px;
   height: 100px;
 }
@@ -112,4 +112,10 @@
   justify-content: flex-start ;
   align-content: center;
   
+}
+.skills-body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width:150px;
 }
