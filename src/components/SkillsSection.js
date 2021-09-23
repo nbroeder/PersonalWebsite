@@ -5,7 +5,10 @@ export const SkillsSection = () => {
     return (
         <div className='section' >
             <text className='section-header'>Skills</text>
-            <Skills title={"Java"} image={sampleImage}></Skills>
+            <div className='projects-body'>
+                <Skills title={"Java"} image={sampleImage}></Skills>
+                <Skills title={"JavaScript"} image={sampleImage}></Skills>
+            </div>
         </div>
     )
 }

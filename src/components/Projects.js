@@ -10,7 +10,7 @@ export const Projects = props => {
             <a href={props.link} className='projects-body'>
                 <img src={props.image} alt="" className='body-image'/>
                 <div className="projects-side" >
-                    <h3>{props.title}</h3>
+                    <text className='body-title'>{props.title}</text>
                     <text>{props.description}</text>
                     
                 </div>
