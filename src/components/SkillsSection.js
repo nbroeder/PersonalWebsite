@@ -8,6 +8,9 @@ export const SkillsSection = () => {
             <div className='projects-body'>
                 <Skills title={"Java"} image={sampleImage}></Skills>
                 <Skills title={"JavaScript"} image={sampleImage}></Skills>
+                <Skills title={"React"} image={sampleImage}></Skills>
+                <Skills title={"Python"} image={sampleImage}></Skills>
+                <Skills title={"SQL"} image={sampleImage}></Skills>
             </div>
         </div>
     )
