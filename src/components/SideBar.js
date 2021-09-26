@@ -7,11 +7,11 @@ export const SideBar = () => {
         <div className='sideBar'>
             <text className='side-bar-header' align='center'>Nicholas Broeders</text>
             <img className='side-bar-image' src={profile} alt='' />
-            <SideBarItem text={"about"}></SideBarItem>
-            <SideBarItem text={"projects"}></SideBarItem>
-            <SideBarItem text={"resume"}></SideBarItem>
-            <SideBarItem text={"skills"}></SideBarItem>
-            <SideBarItem text={"contact me"}></SideBarItem>
+            <SideBarItem text={"About"}></SideBarItem>
+            <SideBarItem text={"Projects"}></SideBarItem>
+            <SideBarItem text={"Skills"}></SideBarItem>
+            <SideBarItem text={"Resume"}></SideBarItem>
+            <SideBarItem text={"Contact me"}></SideBarItem>
         </div>
     )
 }

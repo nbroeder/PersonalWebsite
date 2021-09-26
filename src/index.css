@@ -88,14 +88,7 @@
   gap:10px;
   
 }
-.section-row{
-  display: flex;
-  align-self: center;
-  flex-direction: row;
-  width: 80%;
-  gap:10px;
-  
-}
+
 
 .section-header{
   display: flex;
@@ -103,7 +96,7 @@
   font-weight: bolder;
  align-self: center;
 }
-.projects-body{
+.row-contents{
   display: flex;
   flex-direction: row;
   text-decoration: none;
@@ -130,4 +123,15 @@
 .body-title{
   font-weight: bold;
   font-size: x-large;
+}
+.contact-icon{
+  height:40px;
+  width:40px;
+}
+.contact-body{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: none;
+  color:black;
 }

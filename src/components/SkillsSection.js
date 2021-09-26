@@ -5,7 +5,7 @@ export const SkillsSection = () => {
     return (
         <div className='section' >
             <text className='section-header'>Skills</text>
-            <div className='projects-body'>
+            <div className='row-contents'>
                 <Skills title={"Java"} image={sampleImage}></Skills>
                 <Skills title={"JavaScript"} image={sampleImage}></Skills>
                 <Skills title={"React"} image={sampleImage}></Skills>

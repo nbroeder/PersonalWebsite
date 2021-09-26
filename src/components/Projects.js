@@ -7,7 +7,7 @@ import React from 'react'
 export const Projects = props => {
     return (
         
-            <a href={props.link} className='projects-body'>
+            <a href={props.link} className='row-contents'>
                 <img src={props.image} alt="" className='body-image'/>
                 <div className="projects-side" >
                     <text className='body-title'>{props.title}</text>
