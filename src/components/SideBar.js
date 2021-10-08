@@ -5,6 +5,7 @@ import profile from './images/profilePicture.jpeg'
 export const SideBar = () => {
     return (
         <div className='sideBar'>
+            <br/>
             <text className='side-bar-header' align='center'>Nicholas Broeders</text>
             <img className='side-bar-image' src={profile} alt='' />
             <SideBarItem text={"About"}></SideBarItem>

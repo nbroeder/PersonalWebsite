@@ -1,7 +1,6 @@
 import './App.css';
 import { MainSection } from './components/MainSection';
 import { SideBar } from './components/SideBar';
-import { WebsiteHeader } from './components/WebsiteHeader';
 
 
 function App() {

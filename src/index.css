@@ -1,4 +1,4 @@
-.App-header{
+ .App-header{
   display: flex;
   flex-direction: row;
   flex-grow: 1;
@@ -6,16 +6,16 @@
   gap:100px;
   justify-content: flex-end;
   
-}
+} 
 
-.website-Header {
+/* .website-Header {
   display: flex;
   justify-content: space-between;
   background-color: #32627b;
   flex-direction: column;
   align-items: center;
  
-}
+} */
 
 .sideBar{
   display: flex;
@@ -27,6 +27,7 @@
   left: 0;
   width:20%;
   height:100%;
+  gap:20px;
   
 }
 
@@ -72,11 +73,10 @@
 .main-section{
   display:flex;
   flex-direction: column;
-  
+  gap:50px;
   align-content: flex-end;
   border-spacing: 20px;
   font-size: 20px;
-  
   width: 80%;
   
 }
