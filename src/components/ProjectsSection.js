@@ -1,6 +1,6 @@
 import React from 'react'
 import {Projects} from './Projects'
-import sample from './profilePicture.jpg'
+import sample from './images/profilePicture.jpeg'
 
 
 

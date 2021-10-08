@@ -1,5 +1,5 @@
 import { SideBarItem } from "./SideBarItem"
-import profile from './profilePicture.jpg'
+import profile from './images/profilePicture.jpeg'
 
 
 export const SideBar = () => {

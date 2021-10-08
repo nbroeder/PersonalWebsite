@@ -1,6 +1,6 @@
 import React from 'react'
 import {Skills} from './Skills.js'
-import sampleImage from './profilePicture.jpg'
+import sampleImage from './images/profilePicture.jpeg'
 export const SkillsSection = () => {
     return (
         <div className='section' >
