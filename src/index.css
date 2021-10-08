@@ -134,11 +134,15 @@
   align-items: center;
   text-decoration: none;
   color:black;
+
 }
 .contact-section{
   display: flex;
   flex-direction: row;
   text-decoration: none;
   color:black;
-  row-gap: 20px;
+  justify-content: center;
+  gap: 30px;
+
+  
 }
