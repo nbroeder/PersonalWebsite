@@ -1,9 +1,10 @@
 import React from 'react'
 
-export const SideBarItem = ({text}) => {
+export const SideBarItem = (props) => {
     return (
-        <div className ="side-bar-item"  >
-            <text>{text}</text>
-        </div>
+
+        <a href={"#"+props.link} className ="side-bar-item"  >
+            <text>{props.text}</text>
+        </a>
     )
 }

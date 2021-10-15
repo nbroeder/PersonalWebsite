@@ -7,7 +7,7 @@ let breastCancerDes= 'This project used artificial intelligence to determine the
 
 export const ProjectsSection = () => {
     return (
-        <div className="section">
+        <div className="section" id="ProjectsSection">
             <text className="section-header">Projects</text>
             <Projects description={breastCancerDes} title={"Sample Title"} image={sample} link={"https://github.com/nbroeder"} ></Projects>
             <Projects description={"this is a sample description"} title={"Sample Title"} image={sample} link={"https://github.com/nbroeder"} ></Projects>

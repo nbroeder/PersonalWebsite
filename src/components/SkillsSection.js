@@ -15,7 +15,7 @@ import sqlIcon from './images/sql.png'
 
 export const SkillsSection = () => {
     return (
-        <div className='section' >
+        <div className='section' id='SkillsSection'>
             <text className='section-header'>Skills</text>
             <div className='row-contents'>
                 <Skills title={"Java"} image={javaIcon}></Skills>
