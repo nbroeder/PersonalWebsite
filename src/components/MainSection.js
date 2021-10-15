@@ -12,7 +12,7 @@ export const MainSection = () => {
                 <AboutSection ></AboutSection>
                 <ProjectsSection></ProjectsSection>
                 <SkillsSection></SkillsSection>
-                <Section text={'Resume'}></Section>
+                {/*<Section text={'Resume'}></Section>*/}
                 <ContactSection></ContactSection>
             </div>
 
