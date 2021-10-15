@@ -21,7 +21,7 @@ export const About = () => {
             logically and I enjoyed finding the best solution to a problem that I was facing.
             </p>
             <p>
-            Studying at a western university the past three years has given me the opportunity to improve and 
+            Studying at western university the past three years has given me the opportunity to improve and 
             grow both as a person and a programmer. I have been able to learn what is industry standard and how 
             to not only create successful projects but how to write good code and how to work in teams in a 
             professional environment. The last three years have only reinforced my passion for coding and no 
