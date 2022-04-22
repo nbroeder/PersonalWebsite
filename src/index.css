@@ -3,27 +3,27 @@ html, body {
   height:100%;
   width:100%;
   background-color: lightgrey;
-  display: flex;
-  flex-direction: row;
-  
- 
 }
  
-
+.App{
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  height:100%;
+  width:100%;
+  
+}
 
 
 .sideBar{
   display: flex;
   background-color: rgb(41, 41, 41);
   flex-direction: column;
-  /*gap: 20px;*/
-  position: fixed;
-  /*align-items: center;*/
-  left: 0;
   width:20%;
   height:100%;
   gap:10px;
-  order:1;
+  position:fixed;
+
   
 }
 
@@ -66,36 +66,31 @@ html, body {
   font-size: 45px;
   font-weight: bolder;
 }
+
+
 .main-section{
   display: flex;
-  align-self: center;
   flex-direction: column;
-  position: relative;
-  left:25%;
-  
   height: 100%;
+  width:70%;
   gap:40px;
-  
-  
+  right:5%;
+  position:absolute;
 }
+
 .section{
   display: flex;
   align-self: center;
   flex-direction: column;
   gap:40px;
-  
-}
-
-.about-body {
-  font-size: 130%;
-  
+  width: 100%;
 }
 
 .section-header{
   display: flex;
   font-size: 35px;
   font-weight: bolder;
- align-self: center;
+  align-self: center;
 }
 .row-contents{
   display: flex;
@@ -103,7 +98,7 @@ html, body {
   text-decoration: none;
   justify-content: space-evenly;
   color:black;
-  gap:40px;
+  width:100%;
 }
 .skills-image{
   width: 100px;
@@ -142,7 +137,7 @@ html, body {
   align-items: center;
   text-decoration: none;
   color:black;
-
+  gap:20px;
 }
 .contact-section{
   display: flex;
@@ -150,7 +145,17 @@ html, body {
   text-decoration: none;
   color:black;
   justify-content: space-evenly;
-  gap: 30px;
+  position: fixed;
+  bottom: 0%;
+  width:75%;
+}
 
-  
+/*Text fonts*/
+
+.regular-font {
+  font-size: 130%;
+}
+
+.large-bold-font {
+  font-size: xx-large;
 }

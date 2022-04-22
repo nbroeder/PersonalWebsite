@@ -11,7 +11,7 @@ export const Projects = props => {
                 <img src={props.image} alt="" className='projects-image'/>
                 <div className="projects-side" >
                     <text className='body-title'>{props.title}</text>
-                    <text>{props.description}</text>
+                    <text className='regular-font'>{props.description}</text>
                     
                 </div>
             </a>

@@ -2,7 +2,7 @@ import React from 'react'
 
 export const About = () => {
     return (
-        <div className='about-body'>
+        <div className='regular-font'>
              <p>
             Hello, and welcome to my website. My name is Nicholas Broeders and I am a third year software 
              engineering student studying at Western University. I created this website so that I would have 

@@ -5,7 +5,7 @@ export const Contact = (props) => {
         
             <a href={props.link} className='contact-body'>
                 <img className = 'contact-icon'src={props.icon} alt="" />
-                <text>{props.text}</text>
+                <text className='body-title'>{props.text}</text>
 
             </a>
         

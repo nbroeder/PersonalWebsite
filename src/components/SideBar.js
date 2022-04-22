@@ -11,8 +11,7 @@ export const SideBar = () => {
             <SideBarItem text={"About"} link={"PersonalWebsite"}></SideBarItem>
             <SideBarItem text={"Projects"} link={"PersonalWebsite/projects"}></SideBarItem>
             <SideBarItem text={"Skills"} link={"PersonalWebsite/skills"}></SideBarItem>
-            {/*<SideBarItem text={"Resume"}></SideBarItem>*/}
-            <SideBarItem text={"Contact me"} link={"PersonalWebsite/contact"}></SideBarItem>
+           
         </div>
     )
 }

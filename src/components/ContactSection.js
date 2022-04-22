@@ -8,9 +8,8 @@ import linkedinIcon from './images/linkedin.png'
 
 export const ContactSection = () => {
     return (
-        <div className='section' id='ContactSection'>
-             <br/>
-            <text  className='section-header'>Contact</text>
+       
+            
             <div className='contact-section'>
                 
                 <Contact icon={phoneIcon} text='519-701-2110'></Contact>
@@ -18,6 +17,6 @@ export const ContactSection = () => {
                 <Contact icon={githubIcon} link={"https://github.com/nbroeder"} text={'nbroeder'}></Contact>
                 <Contact icon={linkedinIcon} link={"https://www.linkedin.com/in/nicholas-broeders-6552251b7/"} text={'nbroeder'}></Contact>
             </div>
-        </div>
+      
     )
 }

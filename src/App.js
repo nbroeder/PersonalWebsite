@@ -15,12 +15,14 @@ function App() {
          {/*<WebsiteHeader></WebsiteHeader>*/}
          <SideBar></SideBar>
          <div className='main-section'>
+         
           <Routes>
             <Route path="PersonalWebsite" element={<AboutSection/>}/>
             <Route path="PersonalWebsite/skills" element={<SkillsSection/>}/>
-            <Route path="PersonalWebsite/contact" element={<ContactSection/>}/>
+            <Route path="PersonalWebsite/resume" element={<ContactSection/>}/>
             <Route path="PersonalWebsite/projects" element={<ProjectsSection/>}/>
           </Routes>
+          <ContactSection></ContactSection>
          </div>
         
       </div>
