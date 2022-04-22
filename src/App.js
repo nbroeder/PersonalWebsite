@@ -19,7 +19,6 @@ function App() {
           <Routes>
             <Route path="PersonalWebsite" element={<AboutSection/>}/>
             <Route path="PersonalWebsite/skills" element={<SkillsSection/>}/>
-            <Route path="PersonalWebsite/resume" element={<ContactSection/>}/>
             <Route path="PersonalWebsite/projects" element={<ProjectsSection/>}/>
           </Routes>
           <ContactSection></ContactSection>

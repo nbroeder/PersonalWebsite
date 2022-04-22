@@ -12,7 +12,6 @@ export const Projects = props => {
                 <div className="projects-side" >
                     <text className='body-title'>{props.title}</text>
                     <text className='regular-font'>{props.description}</text>
-                    
                 </div>
             </a>
 
