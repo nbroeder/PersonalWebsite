@@ -17,9 +17,9 @@ function App() {
          <div className='main-section'>
          
           <Routes>
-            <Route path="PersonalWebsite" element={<AboutSection/>}/>
-            <Route path="PersonalWebsite/skills" element={<SkillsSection/>}/>
-            <Route path="PersonalWebsite/projects" element={<ProjectsSection/>}/>
+            <Route path="/" element={<AboutSection/>}/>
+            <Route path="/skills" element={<SkillsSection/>}/>
+            <Route path="/projects" element={<ProjectsSection/>}/>
           </Routes>
           <ContactSection></ContactSection>
          </div>
