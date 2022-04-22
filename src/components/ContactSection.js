@@ -9,6 +9,7 @@ import linkedinIcon from './images/linkedin.png'
 export const ContactSection = () => {
     return (
         <div className='section' id='ContactSection'>
+             <br/>
             <text  className='section-header'>Contact</text>
             <div className='contact-section'>
                 

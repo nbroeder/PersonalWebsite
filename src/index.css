@@ -1,12 +1,14 @@
- .App-header{
+html, body {
+  margin:0px;
+  height:100%;
+  width:100%;
+  background-color: lightgrey;
   display: flex;
   flex-direction: row;
-  flex-grow: 1;
-  background-color: lightgrey;
-  gap:100px;
-  justify-content: flex-end;
   
-} 
+ 
+}
+ 
 
 
 
@@ -21,6 +23,7 @@
   width:20%;
   height:100%;
   gap:10px;
+  order:1;
   
 }
 
@@ -64,24 +67,29 @@
   font-weight: bolder;
 }
 .main-section{
-  display:flex;
+  display: flex;
+  align-self: center;
   flex-direction: column;
-  gap:50px;
-  align-content: flex-end;
-  border-spacing: 20px;
-  font-size: 20px;
-  width: 80%;
+  position: relative;
+  left:25%;
+  
+  height: 100%;
+  gap:40px;
+  
   
 }
 .section{
   display: flex;
   align-self: center;
   flex-direction: column;
-  width: 80%;
   gap:40px;
   
 }
 
+.about-body {
+  font-size: 130%;
+  
+}
 
 .section-header{
   display: flex;
@@ -95,6 +103,7 @@
   text-decoration: none;
   justify-content: space-evenly;
   color:black;
+  gap:40px;
 }
 .skills-image{
   width: 100px;

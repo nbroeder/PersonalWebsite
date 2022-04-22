@@ -1,18 +1,30 @@
 import './App.css';
-import { MainSection } from './components/MainSection';
+import { Routes, Route } from "react-router-dom"
+
 import { SideBar } from './components/SideBar';
+import { AboutSection } from './components/AboutSection';
+import { SkillsSection } from './components/SkillsSection';
+import { ProjectsSection } from './components/ProjectsSection';
+import { ContactSection } from './components/ContactSection';
 
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+    
+         {/*<WebsiteHeader></WebsiteHeader>*/}
+         <SideBar></SideBar>
+         <div className='main-section'>
+          <Routes>
+            <Route path="PersonalWebsite" element={<AboutSection/>}/>
+            <Route path="PersonalWebsite/skills" element={<SkillsSection/>}/>
+            <Route path="PersonalWebsite/contact" element={<ContactSection/>}/>
+            <Route path="PersonalWebsite/projects" element={<ProjectsSection/>}/>
+          </Routes>
+         </div>
         
-       {/*<WebsiteHeader></WebsiteHeader>*/}
-       <SideBar></SideBar>
-       <MainSection></MainSection>
-      </header>
-    </div>
+      </div>
+    
   );
 }
 

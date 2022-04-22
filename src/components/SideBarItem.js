@@ -1,10 +1,11 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 
 export const SideBarItem = (props) => {
     return (
 
-        <a href={"#"+props.link} className ="side-bar-item"  >
-            <text>{props.text}</text>
-        </a>
+        <Link to={props.link} className ="side-bar-item"  >
+           {props.text}
+        </Link>
     )
 }

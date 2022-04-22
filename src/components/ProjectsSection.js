@@ -9,6 +9,7 @@ let minesweeperDes = 'This project I used javascript and HTML to recreate the cl
 export const ProjectsSection = () => {
     return (
         <div className="section" id="ProjectsSection">
+             <br/>
             <text className="section-header">Projects</text>
             <Projects description={breastCancerDes} title={"Malignent Tumor Identification"} image={breastCancerIcon} link={"https://gideon2020project.github.io/linearGideon/?fbclid=IwAR31LUqqI4WpRSr197e6acsWwUYs-KljdTtrOI8diR-3KVAaTej4PSYD_S0"} ></Projects>
             <Projects description={minesweeperDes} title={"Minesweeper"} image={flagIcon} link={"https://github.com/nbroeder/Minesweeperjs"} ></Projects>
