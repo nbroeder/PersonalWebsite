@@ -6,23 +6,23 @@ import { AboutSection } from './components/AboutSection';
 import { SkillsSection } from './components/SkillsSection';
 import { ProjectsSection } from './components/ProjectsSection';
 import { ContactSection } from './components/ContactSection';
-
+import { MainSection } from './components/MainSection';
 
 function App() {
   return (
     <div className="App">
     
-         {/*<WebsiteHeader></WebsiteHeader>*/}
          <SideBar></SideBar>
-         <div className='main-section'>
+         <MainSection></MainSection>
+         {/*<div className='main-section'>
          
-          <Routes>
+         <Routes>
             <Route path="/" element={<AboutSection/>}/>
             <Route path="/skills" element={<SkillsSection/>}/>
             <Route path="/projects" element={<ProjectsSection/>}/>
-          </Routes>
+  </Routes>
           <ContactSection></ContactSection>
-         </div>
+         </div>*/}
         
       </div>
     

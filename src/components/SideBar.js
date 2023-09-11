@@ -9,8 +9,8 @@ export const SideBar = () => {
             <text className='side-bar-header' align='center'>Nicholas Broeders</text>
             <img className='side-bar-image' src={profile} alt='' />
             <SideBarItem text={"About"} link={"/"}></SideBarItem>
-            <SideBarItem text={"Projects"} link={"/projects"}></SideBarItem>
-            <SideBarItem text={"Skills"} link={"/skills"}></SideBarItem>
+            <SideBarItem text={"Minesweeper"} link={"/minesweeper"}></SideBarItem>
+            {/* {<SideBarItem text={"Skills"} link={"/skills"}></SideBarItem>} */}
            
         </div>
     )
