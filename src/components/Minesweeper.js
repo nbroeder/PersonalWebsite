@@ -7,22 +7,27 @@ var numMines = 10;
 var boardHeight = 10;
 var boardWidth = 10;
 var numTiles = boardHeight * boardWidth;
-
+var numMinesFound = 0;
+var numTilesClicked = 0;
 class mineTile  {
   constructor(index, mineStatus, adjacentMines){
     this.mine = mineStatus;
     this.index = index;
     this.adjacentMines = adjacentMines;
     this.clicked = false;
+    this.flag = false;
   }
 }
 
 export const Minesweeper = () => {
   
-  const [mineLocations, updateMineLocations] = useState(() => selectMines(numMines))
+  const [mineLocations, updateMineLocations] = useState(() => selectMineLocations(numMines))
   const [boardTiles, updateBoard] = useState(() => createBoard(boardWidth, boardHeight))
+  const [flagsOn, updateFlag] = useState(false);
+  const [gameOver, updateGameOver] = useState(false);
 
-  function selectMines(mineAmount) {
+
+  function selectMineLocations(mineAmount) {
     var arr = [];
     while(arr.length < mineAmount){
       var r = Math.floor(Math.random() * 100);
@@ -95,7 +100,7 @@ export const Minesweeper = () => {
     var tempBoard = [];
     var index = 0;
 
-    updateMineLocations(selectMines(numMines))
+    updateMineLocations(selectMineLocations(numMines))
     for (var i = 0; i < boardHeight; i++){
       var tempRow = [];
       for (var j = 0; j < boardWidth; j++){
@@ -110,25 +115,125 @@ export const Minesweeper = () => {
   }
 
   const testClick = (i)=>{
-    var arr = []
-    boardTiles.forEach(function(e){
-      arr.push(e);
-    });
-    arr[Math.floor(i / boardWidth)][i % boardHeight].clicked = true;
-    updateBoard(arr);
+    if(flagsOn == false){
+      var arr = []
+      boardTiles.forEach(function(e){
+        arr.push(e);
+      });
+      arr[Math.floor(i / boardWidth)][i % boardHeight].clicked = true;
+      numTilesClicked++;
+      updateBoard(arr);
+      if(boardTiles[Math.floor(i / boardWidth)][i % boardHeight].adjacentMines == 0){
+        arr = autoClear(i);
+      }
+    }else{
+      var arr = []
+      boardTiles.forEach(function(e){
+        arr.push(e);
+      });
+      arr[Math.floor(i / boardWidth)][i % boardHeight].flag = !arr[Math.floor(i / boardWidth)][i % boardHeight].flag;
+      updateBoard(arr);
+    }
+
+    if (checkEndCondition == true){
+      updateGameOver(!gameOver);
+    }
   };
+
+  function checkEndCondition(){
+    if(numTiles - numTilesClicked - numMines <= 0){
+      console.log(numTiles - numTilesClicked - numMines <= 0)
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  function autoClear(i){
+    var y = Math.floor(i / boardWidth);
+    var x = i % boardHeight;
+
+    var onLeftSide = false;
+    var onRightSide = false;
+    var onTopRow = false;
+    var onBottomRow = false;
+
+    if((i + 1) % boardWidth == 0){
+      onRightSide = true;
+    }else if(i % boardWidth == 0) {
+      onLeftSide = true;
+    }
+    if(i < boardWidth){
+      onTopRow = true;
+    }else if(i >= (boardWidth * boardHeight) - boardWidth){
+      onBottomRow = true;
+    }
+
+    if(onLeftSide == false){
+      if(boardTiles[y][x - 1].mine == false && boardTiles[y][x - 1].clicked == false){
+        testClick(i - 1);
+      }
+      if(onTopRow == false){
+        if(boardTiles[y - 1][x - 1].mine == false && boardTiles[y - 1][x - 1].clicked == false){
+          testClick(i - boardWidth - 1);
+        }
+      }
+      if(onBottomRow == false){
+        if(boardTiles[y + 1][x - 1].mine == false && boardTiles[y + 1][x - 1].clicked == false){
+          testClick(i + boardWidth - 1);
+        }
+      }
+      
+    }
+
+    if(onRightSide == false){
+      if(boardTiles[y][x + 1].mine == false && boardTiles[y][x + 1].clicked == false){
+        testClick(i + 1);
+      }
+      if(onTopRow == false){
+        if(boardTiles[y - 1][x + 1].mine == false && boardTiles[y - 1][x + 1].clicked == false){
+          testClick(i - boardWidth + 1);
+        }
+      }
+      if(onBottomRow == false){
+        if(boardTiles[y + 1][x + 1].mine == false && boardTiles[y + 1][x + 1].clicked == false){
+          testClick(i + boardWidth + 1);
+        }
+      }
+    }
+
+    if(onTopRow == false){
+      if(boardTiles[y - 1][x].mine == false && boardTiles[y - 1][x].clicked == false){
+        testClick(i - boardWidth);
+      }
+    }
+
+    if(onBottomRow == false){
+      if(boardTiles[y + 1][x].mine == false && boardTiles[y + 1][x].clicked == false){
+        testClick(i + boardWidth);
+      }
+    }
+
+    
+  }
 
   return (
     
     <div>
-      <Button variant='contained' onClick={() => updateBoard(createBoard(boardWidth, boardHeight))}>Start</Button>
+      <div>
+        <label>{numMines - numMinesFound}</label>
+        <Button variant='contained' onClick={() => updateBoard(createBoard(boardWidth, boardHeight))}>Start</Button>
+        <Button onClick={() => updateFlag(!flagsOn)}>{flagsOn?"flags on":"flags off"}</Button>
+      </div>
+      
       <Grid container spacing = {0} columns={10} width={350} height = {350}>
         {Array.from(Array(100)).map((_, index) => (
         <Grid xs={1} key={index}>
-          <MineButton  isClickedFunc = {testClick} tileSpecs = {boardTiles[Math.floor(index / boardWidth)][index % boardHeight]}></MineButton>
+          <MineButton  isClickedFunc = {testClick} tileSpecs = {boardTiles[Math.floor(index / boardHeight)][index % boardWidth]}></MineButton>
         </Grid>
         ))}
       </Grid>
+      <label>{gameOver?"Game Over":"Keep going"}</label>
     </div>
     
   )
