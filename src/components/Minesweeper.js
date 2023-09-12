@@ -8,11 +8,19 @@ var boardHeight = 10;
 var boardWidth = 10;
 var numTiles = boardHeight * boardWidth;
 
+class mineTile  {
+  constructor(index, mineStatus, adjacentMines){
+    this.mine = mineStatus;
+    this.index = index;
+    this.adjacentMines = adjacentMines;
+    this.clicked = false;
+  }
+}
 
 export const Minesweeper = () => {
   
   const [mineLocations, updateMineLocations] = useState(() => selectMines(numMines))
-  const [btnClicked, updateBtnClicked] = useState(() => setBtnsToUnclicked(numTiles))
+  const [boardTiles, updateBoard] = useState(() => createBoard(boardWidth, boardHeight))
 
   function selectMines(mineAmount) {
     var arr = [];
@@ -83,34 +91,41 @@ export const Minesweeper = () => {
     return adjacentMines;
   }
 
-  function setBtnsToUnclicked(numTiles){
-    var arr = [];
-    while(arr.length < numTiles){
-      arr.push(0);
-    }
+  function createBoard(boardWidth, boardHeight){
+    var tempBoard = [];
+    var index = 0;
 
-    return arr
+    updateMineLocations(selectMines(numMines))
+    for (var i = 0; i < boardHeight; i++){
+      var tempRow = [];
+      for (var j = 0; j < boardWidth; j++){
+        var mine = new mineTile(index, mineLocations.includes(index), getAdjacentMines(mineLocations, index));
+        tempRow[j] = mine;
+        index++;
+      }
+      tempBoard[i] = tempRow;
+    }
+    return tempBoard
+
   }
 
   const testClick = (i)=>{
-    
     var arr = []
-    btnClicked.forEach(function(e){
+    boardTiles.forEach(function(e){
       arr.push(e);
     });
-    arr[i] = 1;
-    updateBtnClicked(arr);
-    console.log(btnClicked)
+    arr[Math.floor(i / boardWidth)][i % boardHeight].clicked = true;
+    updateBoard(arr);
   };
 
   return (
     
     <div>
-      <Button variant='contained' onClick={() => updateMineLocations(selectMines(numMines))}>Start</Button>
+      <Button variant='contained' onClick={() => updateBoard(createBoard(boardWidth, boardHeight))}>Start</Button>
       <Grid container spacing = {0} columns={10} width={350} height = {350}>
         {Array.from(Array(100)).map((_, index) => (
         <Grid xs={1} key={index}>
-          <MineButton  isClickedFunc = {testClick} index = {index} mine = {mineLocations.includes(index) === true? true : false} clicked = {btnClicked[index]  === 0 ? false : true} adjacentMines = {getAdjacentMines(mineLocations, index)}></MineButton>
+          <MineButton  isClickedFunc = {testClick} tileSpecs = {boardTiles[Math.floor(index / boardWidth)][index % boardHeight]}></MineButton>
         </Grid>
         ))}
       </Grid>
