@@ -3,20 +3,42 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import {MineButton} from './MineButton';
 
+import bombImg from './minesweeper/bombTile.png'
+import clickedBombImg from './minesweeper/clickedBomb.png'
+import clickedTileImg from './minesweeper/clickedTile.png'
+import eightImg from './minesweeper/eightTile.png'
+import fiveImg from './minesweeper/fiveTile.png'
+import flagImg from './minesweeper/flagTile.png'
+import fourImg from './minesweeper/fourTile.png'
+import oneImg from './minesweeper/oneTile.png'
+import sevenImg from './minesweeper/sevenTile.png'
+import sixImg from './minesweeper/sixTile.png'
+import threeImg from './minesweeper/threeTile.png'
+import twoImg from './minesweeper/twoTile.png'
+import unclickedImg from './minesweeper/unclickedTile.png'
+
+var clickedImgs = [clickedTileImg, oneImg, twoImg, threeImg, fourImg, fiveImg, sixImg, sevenImg, eightImg];
 var numMines = 10;
 var boardHeight = 10;
 var boardWidth = 10;
 var numTiles = boardHeight * boardWidth;
 var numMinesFound = 0;
 var numTilesClicked = 0;
+var interval;
 class mineTile  {
-  constructor(index, mineStatus, adjacentMines){
+  constructor(index, mineStatus, adjacentMines, image){
     this.mine = mineStatus;
     this.index = index;
     this.adjacentMines = adjacentMines;
     this.clicked = false;
     this.flag = false;
+    this.image = image;
   }
+
+  getAdjacentMines() {
+    return this.adjacentMines;
+  }
+
 }
 
 export const Minesweeper = () => {
@@ -25,6 +47,7 @@ export const Minesweeper = () => {
   const [boardTiles, updateBoard] = useState(() => createBoard(boardWidth, boardHeight))
   const [flagsOn, updateFlag] = useState(false);
   const [gameOver, updateGameOver] = useState(false);
+  const [timer, updateTimer] = useState(0);
 
 
   function selectMineLocations(mineAmount) {
@@ -36,16 +59,16 @@ export const Minesweeper = () => {
     return arr
   }
 
-  function getAdjacentMines(mineArray, index){
+  function calculateAdjacentMines(mineArray, index){
     var adjacentMines = 0;
     var onLeftSide = false;
     var onRightSide = false;
     var onTopRow = false;
     var onBottomRow = false;
 
-    if((index + 1) % boardWidth == 0){
+    if((index + 1) % boardWidth === 0){
       onRightSide = true;
-    }else if(index % boardWidth == 0) {
+    }else if(index % boardWidth === 0) {
       onLeftSide = true;
     }
     if(index < boardWidth){
@@ -54,41 +77,41 @@ export const Minesweeper = () => {
       onBottomRow = true;
     }
 
-    if(onTopRow == false){
+    if(onTopRow === false){
       if(mineArray.includes(index - boardWidth)) 
           adjacentMines++;
 
-      if(onLeftSide == false){
+      if(onLeftSide === false){
         if(mineArray.includes(index - boardWidth - 1)) 
           adjacentMines++;
       }
 
-      if(onRightSide == false){
+      if(onRightSide === false){
         if(mineArray.includes(index - boardWidth + 1)) 
           adjacentMines++;
       }
     }
 
-    if(onBottomRow == false){
+    if(onBottomRow === false){
       if(mineArray.includes(index + boardWidth)) 
           adjacentMines++;
 
-      if(onLeftSide == false){
+      if(onLeftSide === false){
         if(mineArray.includes(index + boardWidth - 1)) 
           adjacentMines++;
       }
 
-      if(onRightSide == false){
+      if(onRightSide === false){
         if(mineArray.includes(index + boardWidth + 1)) 
           adjacentMines++;
       }
     }
       
-    if(onLeftSide == false){
+    if(onLeftSide === false){
       if(mineArray.includes(index - 1)) 
           adjacentMines++;
     }
-    if(onRightSide == false){
+    if(onRightSide === false){
       if(mineArray.includes(index + 1)) 
           adjacentMines++;
     }
@@ -104,7 +127,7 @@ export const Minesweeper = () => {
     for (var i = 0; i < boardHeight; i++){
       var tempRow = [];
       for (var j = 0; j < boardWidth; j++){
-        var mine = new mineTile(index, mineLocations.includes(index), getAdjacentMines(mineLocations, index));
+        var mine = new mineTile(index, mineLocations.includes(index), calculateAdjacentMines(mineLocations, index), unclickedImg);
         tempRow[j] = mine;
         index++;
       }
@@ -114,16 +137,34 @@ export const Minesweeper = () => {
 
   }
 
+  function startGame(boardWidth, boardHeight){
+    updateTimer(0);
+    clearInterval(interval);
+    interval = setInterval(() => timerTick(),1000);
+    return createBoard(boardWidth, boardHeight);
+  }
+
+  function timerTick(){
+    updateTimer(timer => timer + 1);
+  }
   const testClick = (i)=>{
-    if(flagsOn == false){
+    var y = Math.floor(i / boardWidth);
+    var x = i % boardHeight;
+
+    if(flagsOn === false){
       var arr = []
       boardTiles.forEach(function(e){
         arr.push(e);
       });
-      arr[Math.floor(i / boardWidth)][i % boardHeight].clicked = true;
+      arr[y][x].clicked = true;
+      if(arr[y][x].mine === false)
+        arr[y][x].image = clickedImgs[arr[y][x].getAdjacentMines()];
+      else
+        arr[y][x].image = clickedBombImg;
+
       numTilesClicked++;
       updateBoard(arr);
-      if(boardTiles[Math.floor(i / boardWidth)][i % boardHeight].adjacentMines == 0){
+      if(boardTiles[y][x].getAdjacentMines() === 0){
         arr = autoClear(i);
       }
     }else{
@@ -131,11 +172,18 @@ export const Minesweeper = () => {
       boardTiles.forEach(function(e){
         arr.push(e);
       });
-      arr[Math.floor(i / boardWidth)][i % boardHeight].flag = !arr[Math.floor(i / boardWidth)][i % boardHeight].flag;
+
+      if(arr[y][x].flag === true){
+        arr[y][x].image = unclickedImg;
+      }else{
+        arr[y][x].image = flagImg;
+      }
+      arr[y][x].flag = !arr[y][x].flag;
+      
       updateBoard(arr);
     }
 
-    if (checkEndCondition == true){
+    if (checkEndCondition() === true){
       updateGameOver(!gameOver);
     }
   };
@@ -158,9 +206,9 @@ export const Minesweeper = () => {
     var onTopRow = false;
     var onBottomRow = false;
 
-    if((i + 1) % boardWidth == 0){
+    if((i + 1) % boardWidth === 0){
       onRightSide = true;
-    }else if(i % boardWidth == 0) {
+    }else if(i % boardWidth === 0) {
       onLeftSide = true;
     }
     if(i < boardWidth){
@@ -169,47 +217,47 @@ export const Minesweeper = () => {
       onBottomRow = true;
     }
 
-    if(onLeftSide == false){
-      if(boardTiles[y][x - 1].mine == false && boardTiles[y][x - 1].clicked == false){
+    if(onLeftSide === false){
+      if(boardTiles[y][x - 1].mine === false && boardTiles[y][x - 1].clicked === false){
         testClick(i - 1);
       }
-      if(onTopRow == false){
-        if(boardTiles[y - 1][x - 1].mine == false && boardTiles[y - 1][x - 1].clicked == false){
+      if(onTopRow === false){
+        if(boardTiles[y - 1][x - 1].mine === false && boardTiles[y - 1][x - 1].clicked === false){
           testClick(i - boardWidth - 1);
         }
       }
-      if(onBottomRow == false){
-        if(boardTiles[y + 1][x - 1].mine == false && boardTiles[y + 1][x - 1].clicked == false){
+      if(onBottomRow === false){
+        if(boardTiles[y + 1][x - 1].mine === false && boardTiles[y + 1][x - 1].clicked === false){
           testClick(i + boardWidth - 1);
         }
       }
       
     }
 
-    if(onRightSide == false){
-      if(boardTiles[y][x + 1].mine == false && boardTiles[y][x + 1].clicked == false){
+    if(onRightSide === false){
+      if(boardTiles[y][x + 1].mine === false && boardTiles[y][x + 1].clicked === false){
         testClick(i + 1);
       }
-      if(onTopRow == false){
-        if(boardTiles[y - 1][x + 1].mine == false && boardTiles[y - 1][x + 1].clicked == false){
+      if(onTopRow === false){
+        if(boardTiles[y - 1][x + 1].mine === false && boardTiles[y - 1][x + 1].clicked === false){
           testClick(i - boardWidth + 1);
         }
       }
-      if(onBottomRow == false){
-        if(boardTiles[y + 1][x + 1].mine == false && boardTiles[y + 1][x + 1].clicked == false){
+      if(onBottomRow === false){
+        if(boardTiles[y + 1][x + 1].mine === false && boardTiles[y + 1][x + 1].clicked === false){
           testClick(i + boardWidth + 1);
         }
       }
     }
 
-    if(onTopRow == false){
-      if(boardTiles[y - 1][x].mine == false && boardTiles[y - 1][x].clicked == false){
+    if(onTopRow === false){
+      if(boardTiles[y - 1][x].mine === false && boardTiles[y - 1][x].clicked === false){
         testClick(i - boardWidth);
       }
     }
 
-    if(onBottomRow == false){
-      if(boardTiles[y + 1][x].mine == false && boardTiles[y + 1][x].clicked == false){
+    if(onBottomRow === false){
+      if(boardTiles[y + 1][x].mine === false && boardTiles[y + 1][x].clicked === false){
         testClick(i + boardWidth);
       }
     }
@@ -222,7 +270,8 @@ export const Minesweeper = () => {
     <div>
       <div>
         <label>{numMines - numMinesFound}</label>
-        <Button variant='contained' onClick={() => updateBoard(createBoard(boardWidth, boardHeight))}>Start</Button>
+        <Button variant='contained' onClick={() => updateBoard(startGame(boardWidth, boardHeight))}>Start</Button>
+        <label>{timer}</label>
         <Button onClick={() => updateFlag(!flagsOn)}>{flagsOn?"flags on":"flags off"}</Button>
       </div>
       
