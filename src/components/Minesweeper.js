@@ -46,7 +46,8 @@ export const Minesweeper = () => {
   const [mineLocations, updateMineLocations] = useState(() => selectMineLocations(numMines))
   const [boardTiles, updateBoard] = useState(() => createBoard(boardWidth, boardHeight))
   const [flagsOn, updateFlag] = useState(false);
-  const [gameOver, updateGameOver] = useState(false);
+  const [gameOver, updateGameOver] = useState(true);
+  const [minesLeft, updateMinesLeft] = useState(numMines)
   const [timer, updateTimer] = useState(0);
 
 
@@ -138,53 +139,69 @@ export const Minesweeper = () => {
   }
 
   function startGame(boardWidth, boardHeight){
+    if(timer != 0){
+      clearInterval(interval);
+    }
     updateTimer(0);
-    clearInterval(interval);
     interval = setInterval(() => timerTick(),1000);
+    updateGameOver(false);
+    numTilesClicked = 0;
+    numMinesFound = 0;
+    updateMinesLeft(numMines);
     return createBoard(boardWidth, boardHeight);
   }
 
   function timerTick(){
     updateTimer(timer => timer + 1);
   }
+
   const testClick = (i)=>{
     var y = Math.floor(i / boardWidth);
     var x = i % boardHeight;
 
-    if(flagsOn === false){
-      var arr = []
-      boardTiles.forEach(function(e){
-        arr.push(e);
-      });
-      arr[y][x].clicked = true;
-      if(arr[y][x].mine === false)
-        arr[y][x].image = clickedImgs[arr[y][x].getAdjacentMines()];
-      else
-        arr[y][x].image = clickedBombImg;
-
-      numTilesClicked++;
-      updateBoard(arr);
-      if(boardTiles[y][x].getAdjacentMines() === 0){
-        arr = autoClear(i);
+    if(gameOver === false){
+      if(flagsOn === false && boardTiles[y][x].flag === false && boardTiles[y][x].clicked === false){
+        var arr = []
+        boardTiles.forEach(function(e){
+          arr.push(e);
+        });
+        arr[y][x].clicked = true;
+        if(arr[y][x].mine === false)
+          arr[y][x].image = clickedImgs[arr[y][x].getAdjacentMines()];
+        else{
+          arr[y][x].image = clickedBombImg;
+          gameLost();
+        }
+          
+  
+        numTilesClicked++;
+        updateBoard(arr);
+        if(boardTiles[y][x].getAdjacentMines() === 0){
+          arr = autoClear(i);
+        }
+      }else if (flagsOn === true && boardTiles[y][x].clicked === false){
+        var arr = []
+        boardTiles.forEach(function(e){
+          arr.push(e);
+        });
+  
+        if(arr[y][x].flag === true){
+          arr[y][x].image = unclickedImg;
+          numMinesFound--;
+          updateMinesLeft(numMines - numMinesFound);
+        }else{
+          arr[y][x].image = flagImg;
+          numMinesFound++;
+          updateMinesLeft(numMines - numMinesFound);
+        }
+        arr[y][x].flag = !arr[y][x].flag;
+        
+        updateBoard(arr);
       }
-    }else{
-      var arr = []
-      boardTiles.forEach(function(e){
-        arr.push(e);
-      });
 
-      if(arr[y][x].flag === true){
-        arr[y][x].image = unclickedImg;
-      }else{
-        arr[y][x].image = flagImg;
+      if (checkEndCondition() === true){
+        stopGame();
       }
-      arr[y][x].flag = !arr[y][x].flag;
-      
-      updateBoard(arr);
-    }
-
-    if (checkEndCondition() === true){
-      updateGameOver(!gameOver);
     }
   };
 
@@ -195,6 +212,16 @@ export const Minesweeper = () => {
     }else{
       return false;
     }
+  }
+
+  function stopGame(){
+    updateGameOver(!gameOver);
+    clearInterval(interval);
+  }
+
+  function gameLost(){
+
+    stopGame();
   }
 
   function autoClear(i){
@@ -269,9 +296,12 @@ export const Minesweeper = () => {
     
     <div>
       <div>
-        <label>{numMines - numMinesFound}</label>
-        <Button variant='contained' onClick={() => updateBoard(startGame(boardWidth, boardHeight))}>Start</Button>
-        <label>{timer}</label>
+        
+        <label>{"\t"}Mines Left: {"\t"}</label>
+        <label className='minesweeper-font'>{"\t"} {minesLeft + "\t"}</label>
+        <label>{"\t"}Time: {"\t"}</label>
+        <label className='timer-font'>{timer + "\t"}</label>
+        
         <Button onClick={() => updateFlag(!flagsOn)}>{flagsOn?"flags on":"flags off"}</Button>
       </div>
       
@@ -282,7 +312,8 @@ export const Minesweeper = () => {
         </Grid>
         ))}
       </Grid>
-      <label>{gameOver?"Game Over":"Keep going"}</label>
+      <Button variant='contained' onClick={() => updateBoard(startGame(boardWidth, boardHeight))}>Start</Button>
+      <label>{gameOver === false?"":(numTiles - numTilesClicked - numMines) === 0?"You Win Great Job" : "Try Again"}</label>
     </div>
     
   )
