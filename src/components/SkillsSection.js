@@ -26,6 +26,9 @@ export const SkillsSection = () => {
                 <Skills title={"Python"} image={pythonIcon}></Skills>
                 <Skills title={"SQL"} image={sqlIcon}></Skills>
             </div>
+            <br></br>
+            <br></br>
+            
         </div>
        
         
