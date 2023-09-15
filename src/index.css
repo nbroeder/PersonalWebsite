@@ -159,3 +159,13 @@ html, body {
 .large-bold-font {
   font-size: xx-large;
 }
+
+.timer-font {
+  color:red;
+  font-size: 200%;
+}
+
+.minesweeper-font {
+  color:black;
+  font-size: 200%;
+}
